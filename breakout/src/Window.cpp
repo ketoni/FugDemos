@@ -2,11 +2,11 @@
 // Created by Lehdari on 29.9.2018.
 //
 
-#include <game/Window.hpp>
+#include <Window.hpp>
 #include <engine/LogicComponent.hpp>
-#include <game/PhysicsComponent.hpp>
-#include <game/EventHandlers.hpp>
-#include <game/Logics.hpp>
+#include <PhysicsComponent.hpp>
+#include <EventHandlers.hpp>
+#include <Logics.hpp>
 
 
 Window::Window(const Window::Settings &settings) :

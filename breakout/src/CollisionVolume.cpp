@@ -2,7 +2,7 @@
 // Created by Lehdari on 4.12.2018.
 //
 
-#include <game/CollisionVolume.hpp>
+#include <CollisionVolume.hpp>
 
 
 using namespace vm;

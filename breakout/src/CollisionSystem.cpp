@@ -2,8 +2,8 @@
 // Created by Lehdari on 4.12.2018.
 //
 
-#include <game/CollisionSystem.hpp>
-#include <game/CollisionEvent.hpp>
+#include <CollisionSystem.hpp>
+#include <CollisionEvent.hpp>
 #include <engine/EventSystem.hpp>
 #include <Ecs.hpp>
 
