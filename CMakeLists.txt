@@ -21,7 +21,7 @@ target_include_directories(Breakout
     PUBLIC
         breakout/include
         ext/fug/include
-        ext/fug/ext/vecmat
+        ext/vecmat
 )
 
 target_link_libraries(Breakout

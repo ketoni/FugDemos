@@ -8,7 +8,7 @@
 
 #include <engine/EventTypeId.hpp>
 #include <Types.hpp>
-#include <vec2f.h>
+#include <vecmat/vec2f.h>
 
 
 struct CollisionEvent {

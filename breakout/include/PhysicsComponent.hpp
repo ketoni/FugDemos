@@ -7,7 +7,7 @@
 
 
 #include <Ecs.hpp>
-#include <vec2f.h>
+#include <vecmat/vec2f.h>
 
 #include "CollisionVolume.hpp"
 
