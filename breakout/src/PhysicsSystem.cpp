@@ -2,7 +2,7 @@
 // Created by lehdari on 3.11.2018.
 //
 
-#include <game/PhysicsSystem.hpp>
+#include <PhysicsSystem.hpp>
 
 
 void PhysicsSystem::operator()(const EntityId& eId, PhysicsComponent& c)

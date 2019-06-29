@@ -2,8 +2,8 @@
 // Created by Lehdari on 6.4.2019.
 //
 
-#include <game/Logics.hpp>
-#include <game/PhysicsComponent.hpp>
+#include <Logics.hpp>
+#include <PhysicsComponent.hpp>
 #include <Ecs.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <sstream>
