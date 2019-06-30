@@ -3,13 +3,16 @@
 //
 
 #include <EventHandlers.hpp>
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <engine/EventComponent.hpp>
 #include <CollisionEvent.hpp>
 #include <PhysicsComponent.hpp>
 #include <SpriteComponent.hpp>
 
 #include <cstdio> // TEMP
+
+
+using namespace fug;
 
 
 void EventHandler_Block_CollisionEvent::handleEvent(

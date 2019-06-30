@@ -6,15 +6,15 @@
 #define ECSTESTGAME_COLLISIONEVENT_HPP
 
 
-#include <Types.hpp>
+#include <utils/Types.hpp>
 #include <vec2f.h>
 
 
 struct CollisionEvent {
-    EntityId    entityId;
+    fug::EntityId    entityId;
     vm::vec2f   normal;
 
-    CollisionEvent(const EntityId& eId,
+    CollisionEvent(const fug::EntityId& eId,
                    const vm::vec2f& normal = vm::vec2f(0.0f, 0.0f)) :
         entityId    (eId),
         normal      (normal)

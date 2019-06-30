@@ -6,7 +6,7 @@
 #define ECSTESTGAME_PHYSICSCOMPONENT_HPP
 
 
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <vec2f.h>
 
 #include "CollisionVolume.hpp"
@@ -27,7 +27,7 @@ struct PhysicsComponent {
 };
 
 
-DECLARE_COMPONENT_TEMPLATES(PhysicsComponent);
+FUG_DECLARE_COMPONENT_TEMPLATES(PhysicsComponent);
 
 
 #endif //ECSTESTGAME_PHYSICSCOMPONENT_HPP

@@ -9,6 +9,9 @@
 #include <Logics.hpp>
 
 
+using namespace fug;
+
+
 Window::Window(const Window::Settings &settings) :
     _settings           (settings),
     _window             (_settings.videoMode, _settings.windowName),

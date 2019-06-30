@@ -5,4 +5,4 @@
 #include <PhysicsComponent.hpp>
 
 
-DEFINE_COMPONENT_TEMPLATES(PhysicsComponent);
+FUG_DEFINE_COMPONENT_TEMPLATES(PhysicsComponent);

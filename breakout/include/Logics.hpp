@@ -9,17 +9,17 @@
 #include <engine/Logic.hpp>
 
 
-LOGIC(Logic_Ball) {
-    Logic_Ball(const EntityId& paddleId);
+FUG_LOGIC(Logic_Ball) {
+    Logic_Ball(const fug::EntityId& paddleId);
 
-    void operator()(Ecs& ecs, const EntityId& eId);
+    void operator()(fug::Ecs& ecs, const fug::EntityId& eId);
 
-    EntityId    _paddleId;
+    fug::EntityId    _paddleId;
     bool        _followPaddle;
 };
 
-LOGIC(Logic_Paddle) {
-    void operator()(Ecs& ecs, const EntityId& eId);
+FUG_LOGIC(Logic_Paddle) {
+    void operator()(fug::Ecs& ecs, const fug::EntityId& eId);
 };
 
 

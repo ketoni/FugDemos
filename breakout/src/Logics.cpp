@@ -4,8 +4,11 @@
 
 #include <Logics.hpp>
 #include <PhysicsComponent.hpp>
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <SFML/Window/Keyboard.hpp>
+
+
+using namespace fug;
 
 
 Logic_Ball::Logic_Ball(const EntityId& paddleId) :

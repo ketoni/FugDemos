@@ -6,39 +6,43 @@
 #define ECSTESTGAME_COLLISIONSYSTEM_HPP
 
 
-#include <System.hpp>
+#include <ecs/System.hpp>
 #include "PhysicsComponent.hpp"
 
 
-class Ecs;
-class EventSystem;
+namespace fug {
+
+    class Ecs;
+    class EventSystem;
+
+} //namespace fug
 
 
-TECS_SYSTEM(CollisionSubSystem, PhysicsComponent) {
+FUG_SYSTEM(CollisionSubSystem, PhysicsComponent) {
 public:
     friend class CollisionSystem;
 
-    CollisionSubSystem(EventSystem& eventSystem);
+    CollisionSubSystem(fug::EventSystem& eventSystem);
 
-    void operator()(const EntityId& eId, PhysicsComponent& phys);
+    void operator()(const fug::EntityId& eId, PhysicsComponent& phys);
 
 private:
-    EventSystem&        _eventSystem;
+    fug::EventSystem&            _eventSystem;
 
     /// Pointers to references passed to parent CollisionSystem
-    const EntityId*     _parentEId;
-    PhysicsComponent*   _parentPhys;
+    const fug::EntityId*    _parentEId;
+    PhysicsComponent*       _parentPhys;
 };
 
 
-TECS_SYSTEM(CollisionSystem, PhysicsComponent) {
+FUG_SYSTEM(CollisionSystem, PhysicsComponent) {
 public:
-    CollisionSystem(Ecs& ecs, EventSystem& eventSystem);
+    CollisionSystem(fug::Ecs& ecs, fug::EventSystem& eventSystem);
 
-    void operator()(const EntityId& eId, PhysicsComponent& phys);
+    void operator()(const fug::EntityId& eId, PhysicsComponent& phys);
 
 private:
-    Ecs&                _ecs;
+    fug::Ecs&                _ecs;
     CollisionSubSystem  _subSystem;
 };
 

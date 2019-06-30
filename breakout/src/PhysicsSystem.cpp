@@ -5,6 +5,9 @@
 #include <PhysicsSystem.hpp>
 
 
+using namespace fug;
+
+
 void PhysicsSystem::operator()(const EntityId& eId, PhysicsComponent& c)
 {
     c.pos += c.vel;
