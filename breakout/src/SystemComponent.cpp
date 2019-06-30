@@ -2,7 +2,7 @@
 // Created by Lehdari on 17.4.2019.
 //
 
-#include <game/SystemComponent.hpp>
+#include <SystemComponent.hpp>
 
 
-DEFINE_COMPONENT_TEMPLATES(SystemComponent);
+FUG_DEFINE_COMPONENT_TEMPLATES(SystemComponent);

@@ -5,10 +5,11 @@
 #include <CollisionSystem.hpp>
 #include <CollisionEvent.hpp>
 #include <engine/EventSystem.hpp>
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 
 
 using namespace vm;
+using namespace fug;
 
 
 CollisionSubSystem::CollisionSubSystem(EventSystem& eventSystem) :

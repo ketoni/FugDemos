@@ -2,7 +2,7 @@
 // Created by Lehdari on 17.4.2019.
 //
 
-#include <game/CollisionEvent.hpp>
+#include <CollisionEvent.hpp>
 
 
-DEFINE_EVENT_TEMPLATES(CollisionEvent);
+FUG_DEFINE_EVENT_TEMPLATES(CollisionEvent);

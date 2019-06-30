@@ -3,7 +3,7 @@
 //
 
 #include <EventHandlers.hpp>
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <engine/EventComponent.hpp>
 #include <CollisionEvent.hpp>
 #include <PhysicsComponent.hpp>
@@ -11,9 +11,12 @@
 #include <SystemComponent.hpp>
 
 
-DEFINE_EVENT_TEMPLATES(LaunchEvent);
-DEFINE_EVENT_TEMPLATES(BreakEvent);
-DEFINE_EVENT_TEMPLATES(LoseLifeEvent);
+FUG_DEFINE_EVENT_TEMPLATES(LaunchEvent);
+FUG_DEFINE_EVENT_TEMPLATES(BreakEvent);
+FUG_DEFINE_EVENT_TEMPLATES(LoseLifeEvent);
+
+
+using namespace fug;
 
 
 void EventHandler_Block_CollisionEvent::handleEvent(

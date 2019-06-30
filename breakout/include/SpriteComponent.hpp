@@ -2,7 +2,7 @@
 #define SPRITECOMPONENT_HPP
 
 
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 
@@ -18,7 +18,7 @@ struct SpriteComponent {
 };
 
 
-DECLARE_COMPONENT_TEMPLATES(SpriteComponent);
+FUG_DECLARE_COMPONENT_TEMPLATES(SpriteComponent);
 
 
 #endif

@@ -11,9 +11,16 @@
 #include <SystemComponent.hpp>
 
 
+using namespace fug;
+
+
 Window::Window(const Window::Settings &settings) :
     _settings           (settings),
-    _window             (_settings.videoMode, _settings.windowName)
+    _window             (_settings.videoMode, _settings.windowName),
+    _eventSystem        (_ecs),
+    _spriteRenderer     (_window),
+    _collisionSystem    (_ecs, _eventSystem),
+    _logicSystem        (_ecs)
 {
     _window.setFramerateLimit(_settings.framerateLimit);
 

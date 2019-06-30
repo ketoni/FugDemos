@@ -6,7 +6,7 @@
 #define ECSTESTGAME_ENTITYIDCOMPONENT_HPP
 
 
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 
 
 struct EntityIdComponent {
@@ -16,7 +16,7 @@ struct EntityIdComponent {
 };
 
 
-DECLARE_COMPONENT_TEMPLATES(EntityIdComponent);
+FUG_DECLARE_COMPONENT_TEMPLATES(EntityIdComponent);
 
 
 #endif //ECSTESTGAME_ENTITYIDCOMPONENT_HPP

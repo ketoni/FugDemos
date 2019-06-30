@@ -5,4 +5,4 @@
 #include <SpriteComponent.hpp>
 
 
-DEFINE_COMPONENT_TEMPLATES(SpriteComponent);
+FUG_DEFINE_COMPONENT_TEMPLATES(SpriteComponent);

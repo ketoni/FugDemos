@@ -7,15 +7,15 @@
 
 
 #include <engine/EventTypeId.hpp>
-#include <Types.hpp>
+#include <utils/Types.hpp>
 #include <vecmat/vec2f.h>
 
 
 struct CollisionEvent {
-    EntityId    entityId;
+    fug::EntityId    entityId;
     vm::vec2f   normal;
 
-    CollisionEvent(const EntityId& eId,
+    CollisionEvent(const fug::EntityId& eId,
                    const vm::vec2f& normal = vm::vec2f(0.0f, 0.0f)) :
         entityId    (eId),
         normal      (normal)
@@ -23,7 +23,7 @@ struct CollisionEvent {
 };
 
 
-DECLARE_EVENT_TEMPLATES(CollisionEvent);
+FUG_DECLARE_EVENT_TEMPLATES(CollisionEvent);
 
 
 #endif //ECSTESTGAME_COLLISIONEVENT_HPP

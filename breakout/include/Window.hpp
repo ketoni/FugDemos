@@ -9,7 +9,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <Ecs.hpp>
+#include <ecs/Ecs.hpp>
 #include <engine/EventSystem.hpp>
 #include <engine/LogicSystem.hpp>
 
@@ -43,7 +43,12 @@ private:
     Settings            _settings;
     sf::RenderWindow    _window;
 
-    Ecs             _ecs;
+    fug::Ecs            _ecs;
+    fug::EventSystem    _eventSystem;
+    PhysicsSystem       _physicsSystem;
+    SpriteRenderer      _spriteRenderer;
+    CollisionSystem     _collisionSystem;
+    fug::LogicSystem    _logicSystem;
 
     sf::Texture _blockTexture;
     sf::Texture _ballTexture;

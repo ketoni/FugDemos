@@ -14,24 +14,24 @@
 #include "Logics.hpp"
 
 
-EVENT_HANDLER(EventHandler_Block_CollisionEvent, CollisionEvent);
-EVENT_HANDLER(EventHandler_Ball_CollisionEvent, CollisionEvent);
-EVENT_HANDLER(EventHandler_BottomWall_CollisionEvent, CollisionEvent);
+FUG_EVENT_HANDLER(EventHandler_Block_CollisionEvent, CollisionEvent);
+FUG_EVENT_HANDLER(EventHandler_Ball_CollisionEvent, CollisionEvent);
+FUG_EVENT_HANDLER(EventHandler_BottomWall_CollisionEvent, CollisionEvent);
 
 struct LaunchEvent {};
-DECLARE_EVENT_TEMPLATES(LaunchEvent);
-EVENT_LOGIC_HANDLER(EventHandler_Ball_LaunchEvent, LaunchEvent, Logic_Ball);
+FUG_DECLARE_EVENT_TEMPLATES(LaunchEvent);
+FUG_EVENT_LOGIC_HANDLER(EventHandler_Ball_LaunchEvent, LaunchEvent, Logic_Ball);
 
 struct BreakEvent {};
-DECLARE_EVENT_TEMPLATES(BreakEvent);
-EVENT_LOGIC_HANDLER(EventHandler_GameManager_BreakEvent, BreakEvent, Logic_GameManager);
+FUG_DECLARE_EVENT_TEMPLATES(BreakEvent);
+FUG_EVENT_LOGIC_HANDLER(EventHandler_GameManager_BreakEvent, BreakEvent, Logic_GameManager);
 
 struct LoseLifeEvent {};
-DECLARE_EVENT_TEMPLATES(LoseLifeEvent);
-EVENT_LOGIC_HANDLER(
+FUG_DECLARE_EVENT_TEMPLATES(LoseLifeEvent);
+FUG_EVENT_LOGIC_HANDLER(
     EventHandler_GameManager_LoseLifeEvent,
     LoseLifeEvent, Logic_GameManager);
-EVENT_LOGIC_HANDLER(
+FUG_EVENT_LOGIC_HANDLER(
     EventHandler_Ball_LoseLifeEvent,
     LoseLifeEvent, Logic_Ball);
 

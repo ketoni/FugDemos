@@ -6,13 +6,13 @@
 #define ECSTESTGAME_PHYSICSSYSTEM_HPP
 
 
-#include <System.hpp>
+#include <ecs/System.hpp>
 #include "PhysicsComponent.hpp"
 
 
-TECS_SYSTEM(PhysicsSystem, PhysicsComponent) {
+FUG_SYSTEM(PhysicsSystem, PhysicsComponent) {
 public:
-    void operator()(const EntityId& eId, PhysicsComponent& c);
+    void operator()(const fug::EntityId& eId, PhysicsComponent& c);
 };
 
 
