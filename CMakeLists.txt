@@ -34,3 +34,7 @@ target_link_libraries(Breakout
         sfml-graphics
 )
 
+target_compile_definitions(Breakout
+    PRIVATE
+        RES_DIRECTORY="${CMAKE_CURRENT_SOURCE_DIR}/breakout"
+)
