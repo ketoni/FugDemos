@@ -6,7 +6,7 @@
 #define ECSTESTGAME_COLLISIONVOLUME_HPP
 
 
-#include <vec2f.h>
+#include <vecmat/vec2f.h>
 
 
 class CollisionVolume {
