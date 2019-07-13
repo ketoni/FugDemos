@@ -11,18 +11,51 @@
 
 using namespace fug;
 
+static void checkSDLError(int line = -1)
+{
+    const char *error = SDL_GetError();
+    if (*error != '\0') {
+        printf("SDL Error: %s\n", error);
+        if (line != -1)
+            printf(" + line: %i\n", line);
+        SDL_ClearError();
+    }
+}
+
 
 Window::Window(const Window::Settings &settings) :
     _settings           (settings),
-    _window             (_settings.videoMode, _settings.windowName),
     _playerId           (0),
     _ballId             (1),
-    _spriteRenderer     (_window),
     _eventSystem        (_ecs),
     _collisionSystem    (_ecs, _eventSystem),
     _logicSystem        (_ecs)
 {
-    _window.setFramerateLimit(_settings.framerateLimit);
+    SDL_Init(SDL_INIT_VIDEO);
+    _window = SDL_CreateWindow(
+        _settings.windowName,
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        _settings.resolution[0],
+        _settings.resolution[1],
+        SDL_WINDOW_OPENGL
+    );
+    if (!_window)
+        throw std::runtime_error("Failed to create SDL window");
+    checkSDLError(__LINE__);
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+    _glContext = SDL_GL_CreateContext(_window);
+    checkSDLError(__LINE__);
+
+    if (_settings.vsync) {
+        SDL_GL_SetSwapInterval(1);
+        checkSDLError(__LINE__);
+    }
 
     _blockTexture.loadFromFile(RES_DIRECTORY "/res/gfx/blocks.png");
     _ballTexture.loadFromFile(RES_DIRECTORY "/res/gfx/ball.png");
@@ -77,38 +110,45 @@ Window::Window(const Window::Settings &settings) :
     }
 }
 
+Window::~Window()
+{
+    SDL_DeleteContext(_glContext);
+    SDL_DestroyWindow(_window);
+    SDL_Quit();
+}
+
 void Window::loop(void)
 {
     _window.setActive();
     while (_window.isOpen())
     {
         // Event processing
-        sf::Event event;
-        while (_window.pollEvent(event))
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
             handleEvents(event);
 
         runSystems();
         render();
 
-        _window.display();
-        _window.clear();
+        SDL_GL_SwapWindow(_window);
     }
 }
 
-void Window::handleEvents(sf::Event &event)
+void Window::handleEvents(SDL_Event &event)
 {
     switch (event.type) {
-        case sf::Event::Closed:
-            _window.close();
+        case SDL_WINDOWEVENT:
+            if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+                _window.close();
             break;
 
-        case sf::Event::KeyPressed:
-            switch (event.key.code) {
-                case sf::Keyboard::Escape:
+        case SDL_KEYDOWN:
+            switch (event.keysym.sym) {
+                case SDLK_ESCAPE:
                     _window.close();
                     break;
 
-                case sf::Keyboard::Space:
+                case SDLK_SPACE:
                     _eventSystem.sendEvent(_ballId, LaunchEvent());
             }
             break;

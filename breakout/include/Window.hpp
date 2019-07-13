@@ -6,9 +6,7 @@
 #define TYPES_HPP
 
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include <SDL.h>
 #include <ecs/Ecs.hpp>
 #include <engine/EventSystem.hpp>
 #include <engine/LogicSystem.hpp>
@@ -23,25 +21,30 @@ class Window {
 public:
     struct Settings {
         std::string     windowName;
-        sf::VideoMode   videoMode;
-        int64_t         framerateLimit;
+        uint32_t        resolution[2];
+        bool            vsync
 
         Settings(const std::string& windowName = "",
-                 const sf::VideoMode& videoMode = sf::VideoMode(800, 600),
-                 int64_t framerateLimit = 60) :
-             windowName     (windowName),
-             videoMode      (videoMode),
-             framerateLimit (framerateLimit)
+                 const uint32_t resolution = {800, 600},
+                 const bool vsync = true) :
+             windowName (windowName),
+             videoMode  (videoMode),
+             vsync      (vsync)
         {}
     };
 
     Window(const Settings& settings = Settings());
+    ~Window();
+
+    Window(const Window&) = delete;
+    const Window& operator=(const Window&) = delete;
 
     void loop(void);
 
 private:
     Settings            _settings;
-    sf::RenderWindow    _window;
+    SDL_Window*         _window;
+    SDL_GLContext       _glContext;
 
     fug::Ecs            _ecs;
     fug::EventSystem    _eventSystem;

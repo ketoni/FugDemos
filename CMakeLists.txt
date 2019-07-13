@@ -10,8 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 add_subdirectory(ext)
 add_subdirectory(breakout)
 
-# Find and link SFML
-find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+find_package(SDL2 REQUIRED)
 
 add_executable(Breakout 
     ${BREAKOUT_SOURCES}
@@ -22,6 +21,7 @@ target_include_directories(Breakout
         breakout/include
         ext/fug/include
         ext/vecmat
+        ${SDL2_INCLUDE_DIRS}
 )
 
 target_link_libraries(Breakout
@@ -29,9 +29,7 @@ target_link_libraries(Breakout
         fug_ecs
         fug_engine
         vecmat
-        sfml-system
-        sfml-window
-        sfml-graphics
+        ${SDL2_LIBRARIES}
 )
 
 target_compile_definitions(Breakout
