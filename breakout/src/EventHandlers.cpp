@@ -47,8 +47,10 @@ void EventHandler_BottomWall_CollisionEvent::handleEvent(
 void EventHandler_Ball_LaunchEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, Logic_Ball& logic, const LaunchEvent& event)
 {
-    ecs.getComponent<PhysicsComponent>(eId)->vel = vm::vec2f(2.0f, -5.0f);
-    logic._followPaddle = false;
+    if (logic._followPaddle) {
+        ecs.getComponent<PhysicsComponent>(eId)->vel = vm::vec2f(2.0f, -5.0f);
+        logic._followPaddle = false;
+    }
 }
 
 void EventHandler_GameManager_BreakEvent::handleEvent(
