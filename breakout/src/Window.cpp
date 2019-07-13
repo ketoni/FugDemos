@@ -24,8 +24,8 @@ Window::Window(const Window::Settings &settings) :
 {
     _window.setFramerateLimit(_settings.framerateLimit);
 
-    _blockTexture.loadFromFile("../breakout/res/gfx/blocks.png");
-    _ballTexture.loadFromFile("../breakout/res/gfx/ball.png");
+    _blockTexture.loadFromFile(RES_DIRECTORY "/res/gfx/blocks.png");
+    _ballTexture.loadFromFile(RES_DIRECTORY "/res/gfx/ball.png");
 
     auto* eIdComp = _ecs.getSingleton<EntityIdComponent>();
     auto& paddleId = eIdComp->paddleId;
