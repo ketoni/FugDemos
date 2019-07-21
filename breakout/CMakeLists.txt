@@ -1,2 +1,5 @@
+add_subdirectory(include)
 add_subdirectory(src)
+
+set(BREAKOUT_HEADERS ${BREAKOUT_HEADERS} PARENT_SCOPE)
 set(BREAKOUT_SOURCES ${BREAKOUT_SOURCES} PARENT_SCOPE)
