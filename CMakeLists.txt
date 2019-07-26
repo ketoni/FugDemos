@@ -21,8 +21,8 @@ add_subdirectory(${FUGDEMOS_TARGET})
 
 #Breakout target
 if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
-    #Add headers to FUG_HEADERS for auto-scanning
-    set(FUG_HEADERS ${FUG_HEADERS}
+    #Add application headers to FUG_APP_HEADERS for auto-scanning
+    set(FUG_APP_HEADERS ${FUG_APP_HEADERS}
         ${BREAKOUT_HEADERS}
     )
 
@@ -46,7 +46,6 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
 
     target_link_libraries(Breakout
         PUBLIC
-            fug_ecs
             fug_engine
             vecmat
             sfml-system
