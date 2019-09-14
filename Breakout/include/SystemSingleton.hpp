@@ -2,8 +2,8 @@
 // Created by Lehdari on 17.4.2019.
 //
 
-#ifndef ECSTESTGAME_SYSTEMCOMPONENT_HPP
-#define ECSTESTGAME_SYSTEMCOMPONENT_HPP
+#ifndef ECSTESTGAME_SYSTEMSINGLETON_HPP
+#define ECSTESTGAME_SYSTEMSINGLETON_HPP
 
 
 #include <ecs/Ecs.hpp>
@@ -16,7 +16,7 @@
 
 
 /// SystemComponent is a singleton component containing all the systems used
-struct SystemComponent {
+struct SystemSingleton {
     std::unique_ptr<PhysicsSystem>      physicsSystem;
     std::unique_ptr<SpriteRenderer>     spriteRenderer;
     std::unique_ptr<CollisionSystem>    collisionSystem;
@@ -28,4 +28,4 @@ struct SystemComponent {
 FUG_DECLARE_COMPONENT_TEMPLATES(SystemComponent);
 
 
-#endif //ECSTESTGAME_SYSTEMCOMPONENT_HPP
+#endif //ECSTESTGAME_SYSTEMSINGLETON_HPP
