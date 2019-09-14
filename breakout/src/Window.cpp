@@ -7,8 +7,8 @@
 #include <PhysicsComponent.hpp>
 #include <EventHandlers.hpp>
 #include <Logics.hpp>
-#include <EntityIdComponent.hpp>
-#include <SystemComponent.hpp>
+#include <EntityIdSingleton.hpp>
+#include <SystemSingleton.hpp>
 
 
 using namespace fug;
@@ -27,7 +27,7 @@ Window::Window(const Window::Settings &settings) :
     _blockTexture.loadFromFile(RES_DIRECTORY "/res/gfx/blocks.png");
     _ballTexture.loadFromFile(RES_DIRECTORY "/res/gfx/ball.png");
 
-    auto* eIdComp = _ecs.getSingleton<EntityIdComponent>();
+    auto* eIdComp = _ecs.getSingleton<EntityIdSingleton>();
     auto& paddleId = eIdComp->paddleId;
     auto& ballId = eIdComp->ballId;
     auto& gameManagerId = eIdComp->gameManagerId;
@@ -35,7 +35,7 @@ Window::Window(const Window::Settings &settings) :
     ballId = 1;
     gameManagerId = 2;
 
-    auto* sComp = _ecs.getSingleton<SystemComponent>();
+    auto* sComp = _ecs.getSingleton<SystemSingleton>();
     sComp->physicsSystem = std::make_unique<PhysicsSystem>();
     sComp->spriteRenderer = std::make_unique<SpriteRenderer>(_window);
     sComp->eventSystem = std::make_unique<EventSystem>(_ecs);
@@ -126,10 +126,10 @@ void Window::loop(void)
 
 void Window::handleEvents(sf::Event &event)
 {
-    static auto* eIdComp = _ecs.getSingleton<EntityIdComponent>();
+    static auto* eIdComp = _ecs.getSingleton<EntityIdSingleton>();
     static auto& ballId = eIdComp->ballId;
 
-    static auto* sComp = _ecs.getSingleton<SystemComponent>();
+    static auto* sComp = _ecs.getSingleton<SystemSingleton>();
     static auto& eventSystem = *sComp->eventSystem;
 
     switch (event.type) {
@@ -155,7 +155,7 @@ void Window::handleEvents(sf::Event &event)
 
 void Window::runSystems(void)
 {
-    static auto* sComp = _ecs.getSingleton<SystemComponent>();
+    static auto* sComp = _ecs.getSingleton<SystemSingleton>();
     static auto& physicsSystem = *sComp->physicsSystem;
     static auto& spriteRenderer = *sComp->spriteRenderer;
     static auto& collisionSystem = *sComp->collisionSystem;
