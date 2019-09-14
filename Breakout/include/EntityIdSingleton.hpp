@@ -16,7 +16,4 @@ struct EntityIdSingleton {
 };
 
 
-FUG_DECLARE_COMPONENT_TEMPLATES(EntityIdComponent);
-
-
 #endif //ECSTESTGAME_ENTITYIDSINGLETON_HPP

@@ -18,7 +18,4 @@ struct SpriteComponent {
 };
 
 
-FUG_DECLARE_COMPONENT_TEMPLATES(SpriteComponent);
-
-
 #endif

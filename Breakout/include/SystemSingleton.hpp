@@ -25,7 +25,4 @@ struct SystemSingleton {
 };
 
 
-FUG_DECLARE_COMPONENT_TEMPLATES(SystemComponent);
-
-
 #endif //ECSTESTGAME_SYSTEMSINGLETON_HPP
