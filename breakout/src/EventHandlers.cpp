@@ -8,7 +8,7 @@
 #include <CollisionEvent.hpp>
 #include <PhysicsComponent.hpp>
 #include <SpriteComponent.hpp>
-#include <SystemComponent.hpp>
+#include <SystemSingleton.hpp>
 
 
 FUG_DEFINE_EVENT_TEMPLATES(LaunchEvent);
@@ -22,7 +22,7 @@ using namespace fug;
 void EventHandler_Block_CollisionEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, const CollisionEvent& event)
 {
-    auto* sc = ecs.getSingleton<SystemComponent>();
+    auto* sc = ecs.getSingleton<SystemSingleton>();
     sc->eventSystem->broadcastEvent(BreakEvent());
 
     ecs.removeComponent<PhysicsComponent>(eId);
@@ -40,7 +40,7 @@ void EventHandler_Ball_CollisionEvent::handleEvent(
 void EventHandler_BottomWall_CollisionEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, const CollisionEvent& event)
 {
-    auto* sc = ecs.getSingleton<SystemComponent>();
+    auto* sc = ecs.getSingleton<SystemSingleton>();
     sc->eventSystem->broadcastEvent(LoseLifeEvent());
 }
 

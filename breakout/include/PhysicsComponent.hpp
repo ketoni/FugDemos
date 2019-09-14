@@ -27,7 +27,4 @@ struct PhysicsComponent {
 };
 
 
-FUG_DECLARE_COMPONENT_TEMPLATES(PhysicsComponent);
-
-
 #endif //ECSTESTGAME_PHYSICSCOMPONENT_HPP
