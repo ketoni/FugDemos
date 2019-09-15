@@ -13,7 +13,8 @@
 
 
 struct PhysicsComponent {
-    PhysicsComponent(vm::vec2f pos, vm::vec2f vel,
+    PhysicsComponent(vm::vec2f pos = vm::vec2f(0.0f, 0.0f),
+                     vm::vec2f vel = vm::vec2f(0.0f, 0.0f),
                      const CollisionVolume& colVol = CollisionVolume()) :
         pos     (pos),
         vel     (vel),
