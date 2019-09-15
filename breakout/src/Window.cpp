@@ -44,63 +44,56 @@ Window::Window(const Window::Settings &settings) :
 
 
     /* Player */
-    _ecs.addComponent(paddleId, PhysicsComponent(
+    _ecs.setComponent(paddleId, PhysicsComponent(
         vm::vec2f(400, 550), vm::vec2f(0.0, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
-    _ecs.addComponent(paddleId, SpriteComponent(_blockTexture, 3, 64, 32));
+    _ecs.setComponent(paddleId, SpriteComponent(_blockTexture, 3, 64, 32));
     _ecs.getComponent<SpriteComponent>(paddleId)->sprite.setOrigin(32, 16);
-    _ecs.addComponent(paddleId, LogicComponent());
     _ecs.getComponent<LogicComponent>(paddleId)->addLogic<Logic_Paddle>();
 
     /* Ball */
-    _ecs.addComponent(ballId, PhysicsComponent(
+    _ecs.setComponent(ballId, PhysicsComponent(
         vm::vec2f(400, 518), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::CIRCLE, 16.0f)));
-    _ecs.addComponent(ballId, SpriteComponent(_ballTexture, 0, 32, 32));
+    _ecs.setComponent(ballId, SpriteComponent(_ballTexture, 0, 32, 32));
     _ecs.getComponent<SpriteComponent>(ballId)->sprite.setOrigin(16, 16);
-    _ecs.addComponent(ballId, EventComponent());
     _ecs.getComponent<EventComponent>(ballId)->addHandler<EventHandler_Ball_CollisionEvent>();
     _ecs.getComponent<EventComponent>(ballId)->addHandler<EventHandler_Ball_LaunchEvent>();
     _ecs.getComponent<EventComponent>(ballId)->addHandler<EventHandler_Ball_LoseLifeEvent>();
-    _ecs.addComponent(ballId, LogicComponent());
     _ecs.getComponent<LogicComponent>(ballId)->addLogic<Logic_Ball>(paddleId);
 
     /* Game Manager */
-    _ecs.addComponent(gameManagerId, LogicComponent());
     _ecs.getComponent<LogicComponent>(gameManagerId)->
         addLogic<Logic_GameManager>(_window, _blockTexture);
-    _ecs.addComponent(gameManagerId, EventComponent());
     _ecs.getComponent<EventComponent>(gameManagerId)->
         addHandler<EventHandler_GameManager_BreakEvent>();
     _ecs.getComponent<EventComponent>(gameManagerId)->
         addHandler<EventHandler_GameManager_LoseLifeEvent>();
 
     /* Walls */
-    _ecs.addComponent(3, PhysicsComponent(
+    _ecs.setComponent(3, PhysicsComponent(
         vm::vec2f(-16, 300), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -16.0f, -300.0f, 16.0f, 332.0f)));
-    _ecs.addComponent(4, PhysicsComponent(
+    _ecs.setComponent(4, PhysicsComponent(
         vm::vec2f(816, 300), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -16.0f, -300.0f, 16.0f, 332.0f)));
-    _ecs.addComponent(5, PhysicsComponent(
+    _ecs.setComponent(5, PhysicsComponent(
         vm::vec2f(400, -16), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -400.0f, -16.0f, 400.0f, 16.0f)));
-    _ecs.addComponent(6, PhysicsComponent(
+    _ecs.setComponent(6, PhysicsComponent(
         vm::vec2f(400, 648), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -400.0f, -16.0f, 400.0f, 16.0f)));
-    _ecs.addComponent(6, EventComponent());
-        _ecs.getComponent<EventComponent>(6)->addHandler<EventHandler_BottomWall_CollisionEvent>();
+    _ecs.getComponent<EventComponent>(6)->addHandler<EventHandler_BottomWall_CollisionEvent>();
 
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 5; ++j) {
             uint64_t id = i * 8 + j + 7;
-            _ecs.addComponent(id, PhysicsComponent(
+            _ecs.setComponent(id, PhysicsComponent(
                 vm::vec2f(176 + i * 64, 64 + j * 32), vm::vec2f(0.0f, 0.0f),
                 CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
-            _ecs.addComponent(id, SpriteComponent(_blockTexture, (i ^ j) % 4, 64, 32));
+            _ecs.setComponent(id, SpriteComponent(_blockTexture, (i ^ j) % 4, 64, 32));
             _ecs.getComponent<SpriteComponent>(id)->sprite.setOrigin(32, 16);
 
-            _ecs.addComponent(id, EventComponent());
             _ecs.getComponent<EventComponent>(id)->addHandler<EventHandler_Block_CollisionEvent>();
         }
     }
