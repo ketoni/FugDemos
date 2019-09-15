@@ -25,9 +25,7 @@ void EventHandler_Block_CollisionEvent::handleEvent(
     auto* sc = ecs.getSingleton<SystemSingleton>();
     sc->eventSystem->broadcastEvent(BreakEvent());
 
-    ecs.removeComponent<PhysicsComponent>(eId);
-    ecs.removeComponent<SpriteComponent>(eId);
-    ecs.removeComponent<EventComponent>(eId);
+    ecs.removeEntity(eId);
 }
 
 void EventHandler_Ball_CollisionEvent::handleEvent(
@@ -75,16 +73,16 @@ void EventHandler_GameManager_LoseLifeEvent::handleEvent(
             for (int j = 0; j < 5; ++j) {
                 uint64_t id = i * 8 + j + 7;
 
-                if (ecs.getComponent<PhysicsComponent>(id))
+                if (ecs.entityExists(id))
                     continue;
 
-                ecs.addComponent(id, PhysicsComponent(
+                ecs.setComponent(id, PhysicsComponent(
                     vm::vec2f(176 + i * 64, 64 + j * 32), vm::vec2f(0.0f, 0.0f),
                     CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
-                ecs.addComponent(id, SpriteComponent(logic._blockTexture, (i ^ j) % 4, 64, 32));
+                ecs.setComponent(id, SpriteComponent(logic._blockTexture, (i ^ j) % 4, 64, 32));
                 ecs.getComponent<SpriteComponent>(id)->sprite.setOrigin(32, 16);
 
-                ecs.addComponent(id, EventComponent());
+                ecs.getComponent<EventComponent>(id);
                 ecs.getComponent<EventComponent>(id)->addHandler<EventHandler_Block_CollisionEvent>();
             }
         }

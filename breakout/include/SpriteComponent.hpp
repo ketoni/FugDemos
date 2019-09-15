@@ -7,6 +7,7 @@
 
 
 struct SpriteComponent {
+    SpriteComponent() = default;
     SpriteComponent(sf::Texture &texture, int idx, int w, int h) :
         idx(idx)
     {
