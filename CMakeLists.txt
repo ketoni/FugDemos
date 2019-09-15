@@ -26,6 +26,11 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
         ${BREAKOUT_HEADERS}
     )
 
+    #List types for fug type-id system (see ext/fug/cmake/*_types.cmake for details)
+    #Note: Not required when using the auto-scan feature
+    set(FUG_APP_COMPONENT_TYPES "PhysicsComponent SpriteComponent")
+    set(FUG_APP_SINGLETON_TYPES "EntityIdSingleton SystemSingleton")
+
     #Add external dependencies
     add_subdirectory(ext)
 
