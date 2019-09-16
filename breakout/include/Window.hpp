@@ -17,6 +17,8 @@
 #include "SpriteComponent.hpp"
 #include "SpriteRenderer.hpp"
 #include "CollisionSystem.hpp"
+#include "EntityIdSingleton.hpp"
+#include "SystemSingleton.hpp"
 
 
 class Window {
