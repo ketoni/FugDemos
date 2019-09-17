@@ -15,8 +15,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 
+#Name of the target directory
+string(TOLOWER ${FUGDEMOS_TARGET} FUGDEMOS_TARGET_DIRECTORY)
+
+
 #Scan files of target to build
-add_subdirectory(${FUGDEMOS_TARGET})
+add_subdirectory(${FUGDEMOS_TARGET_DIRECTORY})
 
 
 #Breakout target
