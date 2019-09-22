@@ -27,10 +27,15 @@ void Logic_Ball::operator()(Ecs& ecs, const EntityId& eId)
 void Logic_Paddle::operator()(Ecs& ecs, const EntityId& eId)
 {
     auto* pc = ecs.getComponent<PhysicsComponent>(eId);
+    float moveAmount = 4.0f;
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !ecs.getSingleton<GameStateSingleton>()->ballAttached) {
+        moveAmount *= 2.0f;
+    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && pc->pos.x > 32.0f)
-        pc->pos.x -= 4.0f;
+        pc->pos.x -= moveAmount;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && pc->pos.x < 800.0f-32.0f)
-        pc->pos.x += 4.0f;
+        pc->pos.x += moveAmount;
 }
 
 
