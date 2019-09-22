@@ -70,6 +70,10 @@ Window::Window(const Window::Settings &settings) :
     _ecs.getComponent<EventComponent>(gameManagerId)->
         addHandler<EventHandler_GameManager_LoseLifeEvent>();
 
+    /* Game State */
+    auto* gameState = _ecs.getSingleton<GameStateSingleton>();
+    gameState->ballAttached = true;
+
     /* Walls */
     _ecs.setComponent(3, PhysicsComponent(
         vm::vec2f(-16, 300), vm::vec2f(0.0f, 0.0f),

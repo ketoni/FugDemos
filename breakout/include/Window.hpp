@@ -19,6 +19,7 @@
 #include "CollisionSystem.hpp"
 #include "EntityIdSingleton.hpp"
 #include "SystemSingleton.hpp"
+#include "GameStateSingleton.hpp"
 
 
 class Window {
