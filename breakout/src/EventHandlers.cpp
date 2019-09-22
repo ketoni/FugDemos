@@ -10,6 +10,7 @@
 #include <SpriteComponent.hpp>
 #include <SystemSingleton.hpp>
 #include "EntityIdSingleton.hpp"
+#include "GameStateSingleton.hpp"
 
 
 FUG_DEFINE_EVENT_TEMPLATES(LaunchEvent);
@@ -46,9 +47,10 @@ void EventHandler_BottomWall_CollisionEvent::handleEvent(
 void EventHandler_Ball_LaunchEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, Logic_Ball& logic, const LaunchEvent& event)
 {
-    if (logic._followPaddle) {
+    auto* gameState = ecs.getSingleton<GameStateSingleton>();
+    if (gameState->ballAttached) {
         ecs.getComponent<PhysicsComponent>(eId)->vel = vm::vec2f(2.0f, -5.0f);
-        logic._followPaddle = false;
+        gameState->ballAttached = false;
     }
 }
 
@@ -94,7 +96,6 @@ void EventHandler_Ball_LoseLifeEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, Logic_Ball& logic,
     const LoseLifeEvent& event)
 {
-    logic._followPaddle = true;
     auto* pc = ecs.getComponent<PhysicsComponent>(eId);
     pc->pos.x = ecs.getComponent<PhysicsComponent>(ecs.getSingleton<EntityIdSingleton>()->paddleId)->pos.x;
     pc->pos.y = 518;

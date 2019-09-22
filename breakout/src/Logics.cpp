@@ -8,6 +8,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <sstream>
 #include "EntityIdSingleton.hpp"
+#include "GameStateSingleton.hpp"
 
 
 using namespace fug;
@@ -20,7 +21,7 @@ Logic_Ball::Logic_Ball() :
 
 void Logic_Ball::operator()(Ecs& ecs, const EntityId& eId)
 {
-    if (_followPaddle) {
+    if (ecs.getSingleton<GameStateSingleton>()->ballAttached) {
         auto* myPc = ecs.getComponent<PhysicsComponent>(eId);
         auto* paddlePc = ecs.getComponent<PhysicsComponent>(ecs.getSingleton<EntityIdSingleton>()->paddleId);
         myPc->pos.x = paddlePc->pos.x;
