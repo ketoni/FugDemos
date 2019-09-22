@@ -7,6 +7,7 @@
 #include <ecs/Ecs.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <sstream>
+#include "EntityIdSingleton.hpp"
 
 
 using namespace fug;
@@ -22,7 +23,7 @@ void Logic_Ball::operator()(Ecs& ecs, const EntityId& eId)
 {
     if (_followPaddle) {
         auto* myPc = ecs.getComponent<PhysicsComponent>(eId);
-        auto* paddlePc = ecs.getComponent<PhysicsComponent>(_paddleId);
+        auto* paddlePc = ecs.getComponent<PhysicsComponent>(ecs.getSingleton<EntityIdSingleton>()->paddleId);
         myPc->pos.x = paddlePc->pos.x;
     }
 }

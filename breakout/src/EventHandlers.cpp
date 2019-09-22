@@ -9,6 +9,7 @@
 #include <PhysicsComponent.hpp>
 #include <SpriteComponent.hpp>
 #include <SystemSingleton.hpp>
+#include "EntityIdSingleton.hpp"
 
 
 FUG_DEFINE_EVENT_TEMPLATES(LaunchEvent);
@@ -95,7 +96,7 @@ void EventHandler_Ball_LoseLifeEvent::handleEvent(
 {
     logic._followPaddle = true;
     auto* pc = ecs.getComponent<PhysicsComponent>(eId);
-    pc->pos.x = ecs.getComponent<PhysicsComponent>(logic._paddleId)->pos.x;
+    pc->pos.x = ecs.getComponent<PhysicsComponent>(ecs.getSingleton<EntityIdSingleton>()->paddleId)->pos.x;
     pc->pos.y = 518;
     pc->vel = vm::vec2f(0.0f, 0.0f);
 }
