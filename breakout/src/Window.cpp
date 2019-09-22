@@ -20,7 +20,8 @@ Window::Window(const Window::Settings &settings) :
     _eventSystem        (_ecs),
     _spriteRenderer     (_window),
     _collisionSystem    (_ecs, _eventSystem),
-    _logicSystem        (_ecs)
+    _logicSystem        (_ecs),
+    _keyStates          ()
 {
     _window.setFramerateLimit(_settings.framerateLimit);
 
@@ -131,6 +132,7 @@ void Window::handleEvents(sf::Event &event)
             break;
 
         case sf::Event::KeyPressed:
+            _keyStates.handleKeyPress(event.key.code);
             switch (event.key.code) {
                 case sf::Keyboard::Escape:
                     _window.close();
@@ -139,6 +141,10 @@ void Window::handleEvents(sf::Event &event)
                 case sf::Keyboard::Space:
                     eventSystem.sendEvent(ballId, LaunchEvent());
             }
+            break;
+
+        case sf::Event::KeyReleased:
+            _keyStates.handleKeyRelease(event.key.code);
             break;
 
         default:

@@ -12,6 +12,7 @@
 #include <ecs/Ecs.hpp>
 #include <engine/EventSystem.hpp>
 #include <engine/LogicSystem.hpp>
+#include <engine/KeyStates.hpp>
 
 #include "PhysicsSystem.hpp"
 #include "SpriteComponent.hpp"
@@ -44,6 +45,8 @@ public:
 private:
     Settings            _settings;
     sf::RenderWindow    _window;
+
+    fug::KeyStates<sf::Keyboard::Key, sf::Keyboard::KeyCount> _keyStates;
 
     fug::Ecs            _ecs;
     fug::EventSystem    _eventSystem;
