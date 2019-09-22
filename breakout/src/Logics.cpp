@@ -14,11 +14,6 @@
 using namespace fug;
 
 
-Logic_Ball::Logic_Ball() :
-    _followPaddle   (true)
-{
-}
-
 void Logic_Ball::operator()(Ecs& ecs, const EntityId& eId)
 {
     if (ecs.getSingleton<GameStateSingleton>()->ballAttached) {
