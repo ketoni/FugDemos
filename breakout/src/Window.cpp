@@ -28,12 +28,6 @@ Window::Window(const Window::Settings &settings) :
     _ballTexture.loadFromFile(RES_DIRECTORY "/res/gfx/ball.png");
 
     auto* eIdComp = _ecs.getSingleton<EntityIdSingleton>();
-    auto& paddleId = eIdComp->paddleId;
-    auto& ballId = eIdComp->ballId;
-    auto& gameManagerId = eIdComp->gameManagerId;
-    paddleId = 0;
-    ballId = 1;
-    gameManagerId = 2;
 
     auto* sComp = _ecs.getSingleton<SystemSingleton>();
     sComp->physicsSystem = std::make_unique<PhysicsSystem>();
@@ -44,6 +38,8 @@ Window::Window(const Window::Settings &settings) :
 
 
     /* Player */
+    auto& paddleId = eIdComp->paddleId;
+    paddleId = _ecs.getEmptyEntityId();
     _ecs.setComponent(paddleId, PhysicsComponent(
         vm::vec2f(400, 550), vm::vec2f(0.0, 0.0f),
         CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
@@ -52,6 +48,8 @@ Window::Window(const Window::Settings &settings) :
     _ecs.getComponent<LogicComponent>(paddleId)->addLogic<Logic_Paddle>();
 
     /* Ball */
+    auto& ballId = eIdComp->ballId;
+    ballId = _ecs.getEmptyEntityId();
     _ecs.setComponent(ballId, PhysicsComponent(
         vm::vec2f(400, 518), vm::vec2f(0.0f, 0.0f),
         CollisionVolume(CollisionVolume::CIRCLE, 16.0f)));
@@ -63,6 +61,8 @@ Window::Window(const Window::Settings &settings) :
     _ecs.getComponent<LogicComponent>(ballId)->addLogic<Logic_Ball>();
 
     /* Game Manager */
+    auto& gameManagerId = eIdComp->gameManagerId;
+    gameManagerId = _ecs.getEmptyEntityId();
     _ecs.getComponent<LogicComponent>(gameManagerId)->
         addLogic<Logic_GameManager>(_window, _blockTexture);
     _ecs.getComponent<EventComponent>(gameManagerId)->
@@ -91,7 +91,7 @@ Window::Window(const Window::Settings &settings) :
 
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 5; ++j) {
-            uint64_t id = i * 8 + j + 7;
+            uint64_t id = _ecs.getEmptyEntityId();
             _ecs.setComponent(id, PhysicsComponent(
                 vm::vec2f(176 + i * 64, 64 + j * 32), vm::vec2f(0.0f, 0.0f),
                 CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
