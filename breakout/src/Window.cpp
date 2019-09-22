@@ -26,6 +26,7 @@ Window::Window(const Window::Settings &settings) :
 
     _blockTexture.loadFromFile(RES_DIRECTORY "/res/gfx/blocks.png");
     _ballTexture.loadFromFile(RES_DIRECTORY "/res/gfx/ball.png");
+    _boostBarTexture.loadFromFile(RES_DIRECTORY "/res/gfx/bar.png");
 
     auto* eIdComp = _ecs.getSingleton<EntityIdSingleton>();
 
@@ -73,6 +74,16 @@ Window::Window(const Window::Settings &settings) :
     /* Game State */
     auto* gameState = _ecs.getSingleton<GameStateSingleton>();
     gameState->ballAttached = true;
+
+#if 0
+    /* Boost */
+    auto& boostId = eIdComp->boostId;
+    boostId = _ecs.getEmptyEntityId();
+    _ecs.setComponent(boostId, SpriteComponent(_boostBarTexture, 0, 100, 10));
+    auto* barsc = _ecs.getComponent<SpriteComponent>(boostId);
+    auto winsize = _window.getSize();
+    barsc->sprite.setPosition(winsize.x, winsize.y);
+#endif
 
     /* Walls */
     _ecs.setComponent(3, PhysicsComponent(

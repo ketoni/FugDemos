@@ -13,6 +13,7 @@ struct EntityIdSingleton {
     uint64_t    paddleId;
     uint64_t    ballId;
     uint64_t    gameManagerId;
+    uint64_t    boostId;
 };
 
 

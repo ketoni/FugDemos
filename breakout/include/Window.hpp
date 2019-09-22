@@ -55,6 +55,7 @@ private:
 
     sf::Texture _blockTexture;
     sf::Texture _ballTexture;
+    sf::Texture _boostBarTexture;
 
     void handleEvents(sf::Event& event);
     void runSystems(void);

@@ -34,7 +34,7 @@ void EventHandler_Ball_CollisionEvent::handleEvent(
     Ecs& ecs, const EntityId& eId, const CollisionEvent& event)
 {
     auto* phys = ecs.getComponent<PhysicsComponent>(eId);
-    phys->vel = 2.0f*dot(event.normal, -phys->vel)*event.normal+phys->vel;
+    phys->vel = 2.0f*dot(event.normal, 1.01f * -phys->vel)*event.normal+phys->vel;
 }
 
 void EventHandler_BottomWall_CollisionEvent::handleEvent(
