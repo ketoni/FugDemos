@@ -13,8 +13,7 @@
 using namespace fug;
 
 
-Logic_Ball::Logic_Ball(const EntityId& paddleId) :
-    _paddleId       (paddleId),
+Logic_Ball::Logic_Ball() :
     _followPaddle   (true)
 {
 }

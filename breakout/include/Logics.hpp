@@ -11,11 +11,9 @@
 
 
 FUG_LOGIC(Logic_Ball) {
-    Logic_Ball(const fug::EntityId& paddleId);
+    Logic_Ball();
 
     void operator()(fug::Ecs& ecs, const fug::EntityId& eId);
-
-    fug::EntityId    _paddleId;
     bool        _followPaddle;
 };
 
