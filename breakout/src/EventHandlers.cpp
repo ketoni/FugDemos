@@ -79,11 +79,14 @@ void EventHandler_GameManager_LoseLifeEvent::handleEvent(
                 ecs.setComponent(id, PhysicsComponent(
                     vm::vec2f(176 + i * 64, 64 + j * 32), vm::vec2f(0.0f, 0.0f),
                     CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
-                ecs.setComponent(id, SpriteComponent(logic._blockTexture, (i ^ j) % 4, 64, 32));
-                ecs.getComponent<SpriteComponent>(id)->sprite.setOrigin(32, 16);
 
-                ecs.getComponent<EventComponent>(id);
-                ecs.getComponent<EventComponent>(id)->addHandler<EventHandler_Block_CollisionEvent>();
+                SpriteComponent spriteComponent(logic._blockTexture, (i ^ j) % 4, 64, 32);
+                spriteComponent.sprite.setOrigin(32, 16);
+                ecs.setComponent(id, std::move(spriteComponent));
+
+                EventComponent eventComponent;
+                eventComponent.addHandler<EventHandler_Block_CollisionEvent>();
+                ecs.setComponent<EventComponent>(id, std::move(eventComponent));
             }
         }
     }
