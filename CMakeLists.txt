@@ -55,7 +55,7 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
     target_link_libraries(Breakout
         PUBLIC
             fug_engine
-            vecmat
+            fug_graphics
             sfml-system
             sfml-window
             sfml-graphics
