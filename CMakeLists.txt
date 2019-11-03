@@ -25,6 +25,11 @@ add_subdirectory(${FUGDEMOS_TARGET_DIRECTORY})
 
 #Breakout target
 if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
+    if(APPLE)
+        # Apple's filesystems are "case preserving"
+        set(FUGDEMOS_TARGET "${FUGDEMOS_TARGET}_EXE")
+    endif()
+
     #Add application headers to FUG_APP_HEADERS for auto-scanning
     set(FUG_APP_HEADERS ${FUG_APP_HEADERS}
         ${BREAKOUT_HEADERS}
@@ -42,17 +47,17 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
     # Find and link SFML
     find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
-    add_executable(Breakout
+    add_executable(${FUGDEMOS_TARGET}
         ${BREAKOUT_SOURCES}
     )
 
-    target_include_directories(Breakout
+    target_include_directories(${FUGDEMOS_TARGET}
         PUBLIC
             breakout/include
             ext/fug/include
     )
 
-    target_link_libraries(Breakout
+    target_link_libraries(${FUGDEMOS_TARGET}
         PUBLIC
             fug_engine
             fug_graphics
@@ -61,7 +66,7 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
             sfml-graphics
     )
 
-    target_compile_definitions(Breakout
+    target_compile_definitions(${FUGDEMOS_TARGET}
         PRIVATE
             RES_DIRECTORY="${CMAKE_CURRENT_SOURCE_DIR}/breakout"
     )
