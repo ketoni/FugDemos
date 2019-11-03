@@ -5,8 +5,9 @@
 #include <Logics.hpp>
 #include <PhysicsComponent.hpp>
 #include <ecs/Ecs.hpp>
-#include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 #include <sstream>
+#include <SDL.h>
 
 
 using namespace fug;
@@ -31,39 +32,22 @@ void Logic_Ball::operator()(Ecs& ecs, const EntityId& eId)
 void Logic_Paddle::operator()(Ecs& ecs, const EntityId& eId)
 {
     auto* pc = ecs.getComponent<PhysicsComponent>(eId);
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && pc->pos.x > 32.0f)
+    const uint8_t* keys = SDL_GetKeyboardState(NULL);
+    if (keys[SDL_SCANCODE_LEFT] && pc->pos.x > 32.0f)
         pc->pos.x -= 4.0f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && pc->pos.x < 800.0f-32.0f)
+    if (keys[SDL_SCANCODE_RIGHT] && pc->pos.x < 800.0f-32.0f)
         pc->pos.x += 4.0f;
 }
 
-
-sf::Font Logic_GameManager::__font = initFont();
-
-Logic_GameManager::Logic_GameManager(
-    sf::RenderWindow& window, sf::Texture& blockTexture) :
-    _window         (window),
-    _blockTexture   (blockTexture),
-    _points         (0),
-    _lives          (3)
-{
-    _text.setPosition(8.0f, 570.0f);
-    _text.setFillColor(sf::Color::White);
-    _text.setFont(__font);
-    _text.setCharacterSize(20);
-}
+Logic_GameManager::Logic_GameManager(fug::SpriteSheet *blockSheet) :
+    _blockSheet(blockSheet),
+    _points (0),
+    _lives  (3)
+{ }
 
 void Logic_GameManager::operator()(Ecs& ecs, const EntityId& eId)
 {
     std::stringstream text;
     text << "Lives: " << _lives << "\tPoints: " << _points;
-    _text.setString(text.str());
-    _window.draw(_text);
-}
-
-sf::Font Logic_GameManager::initFont()
-{
-    sf::Font font;
-    font.loadFromFile("../res/fonts/modeseven.ttf");
-    return font;
+    std::cout << "\r" << text.str() << std::flush;
 }

@@ -6,16 +6,15 @@
 #define TYPES_HPP
 
 
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include <SDL.h>
 #include <ecs/Ecs.hpp>
 #include <engine/EventSystem.hpp>
 #include <engine/LogicSystem.hpp>
+#include <graphics/SpriteDrawBufferSingleton.hpp>
+#include <graphics/SpriteDrawComponent.hpp>
+#include <graphics/SpriteSheet.hpp>
 
 #include "PhysicsSystem.hpp"
-#include "SpriteComponent.hpp"
-#include "SpriteRenderer.hpp"
 #include "CollisionSystem.hpp"
 #include "EntityIdSingleton.hpp"
 #include "SystemSingleton.hpp"
@@ -24,38 +23,50 @@
 class Window {
 public:
     struct Settings {
-        std::string     windowName;
-        sf::VideoMode   videoMode;
-        int64_t         framerateLimit;
+        std::string windowName;
+        uint32_t    width;
+        uint32_t    height;
+        bool        vsync;
 
         Settings(const std::string& windowName = "",
-                 const sf::VideoMode& videoMode = sf::VideoMode(800, 600),
-                 int64_t framerateLimit = 60) :
-             windowName     (windowName),
-             videoMode      (videoMode),
-             framerateLimit (framerateLimit)
+                 uint32_t width = 800,
+                 uint32_t height = 600,
+                 bool vsync = true) :
+             windowName (windowName),
+             width      (width),
+             height     (height),
+             vsync      (vsync)
         {}
     };
 
     Window(const Settings& settings = Settings());
+    ~Window();
+
+    Window(const Window&) = delete;
+    const Window& operator=(const Window&) = delete;
 
     void loop(void);
 
 private:
     Settings            _settings;
-    sf::RenderWindow    _window;
+    SDL_Window*         _window;
+    SDL_GLContext       _glContext;
+    bool                _running = true;
 
     fug::Ecs            _ecs;
     fug::EventSystem    _eventSystem;
     PhysicsSystem       _physicsSystem;
-    SpriteRenderer      _spriteRenderer;
     CollisionSystem     _collisionSystem;
     fug::LogicSystem    _logicSystem;
 
-    sf::Texture _blockTexture;
-    sf::Texture _ballTexture;
+    GLuint            _spriteProg;
+    glsprite_renderer _spriteRenderer;
 
-    void handleEvents(sf::Event& event);
+    fug::SpriteSheet _blockSheet;
+    fug::SpriteSheet _ballSheet;
+    fug::SpriteSheet _paddleSheet;
+
+    void handleEvents(SDL_Event &event);
     void runSystems(void);
     void render(void);
 };

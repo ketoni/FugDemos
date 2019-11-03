@@ -5,9 +5,9 @@
 #include <EventHandlers.hpp>
 #include <ecs/Ecs.hpp>
 #include <engine/EventComponent.hpp>
+#include <graphics/SpriteDrawComponent.hpp>
 #include <CollisionEvent.hpp>
 #include <PhysicsComponent.hpp>
-#include <SpriteComponent.hpp>
 #include <SystemSingleton.hpp>
 
 
@@ -80,8 +80,7 @@ void EventHandler_GameManager_LoseLifeEvent::handleEvent(
                     vm::vec2f(176 + i * 64, 64 + j * 32), vm::vec2f(0.0f, 0.0f),
                     CollisionVolume(CollisionVolume::BOX, -32.0f, -16.0f, 32.0f, 16.0f)));
 
-                SpriteComponent spriteComponent(logic._blockTexture, (i ^ j) % 4, 64, 32);
-                spriteComponent.sprite.setOrigin(32, 16);
+                SpriteDrawComponent spriteComponent(logic._blockSheet, vm::vec2i((i ^ j) % 4, 0), vm::vec2f(32, 16));
                 ecs.setComponent(id, std::move(spriteComponent));
 
                 EventComponent eventComponent;

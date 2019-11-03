@@ -7,7 +7,7 @@
 
 
 #include <engine/Logic.hpp>
-#include <SFML/Graphics.hpp>
+#include <graphics/SpriteSheet.hpp>
 
 
 FUG_LOGIC(Logic_Ball) {
@@ -24,20 +24,13 @@ FUG_LOGIC(Logic_Paddle) {
 };
 
 FUG_LOGIC(Logic_GameManager) {
-    Logic_GameManager(sf::RenderWindow& window, sf::Texture& blockTexture);
+    Logic_GameManager(fug::SpriteSheet *blockSheet);
 
     void operator()(fug::Ecs& ecs, const fug::EntityId& eId);
 
-    static sf::Font     __font;
-    static sf::Font initFont();
-
-    sf::RenderWindow&   _window;
-    sf::Texture&        _blockTexture;
-    
-    sf::Text            _text;
-
-    int64_t             _points;
-    int64_t             _lives;
+    fug::SpriteSheet *_blockSheet;
+    int64_t      _points;
+    int64_t      _lives;
 };
 
 

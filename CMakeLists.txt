@@ -37,15 +37,13 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
 
     #List types for fug type-id system (see ext/fug/cmake/*_types.cmake for details)
     #Note: Not required when using the auto-scan feature
-    set(FUG_APP_COMPONENT_TYPES "PhysicsComponent SpriteComponent")
+    set(FUG_APP_COMPONENT_TYPES "PhysicsComponent")
     set(FUG_APP_SINGLETON_TYPES "EntityIdSingleton SystemSingleton")
 
     #Add external dependencies
     add_subdirectory(ext)
 
-
-    # Find and link SFML
-    find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+    find_package(SDL2 REQUIRED)
 
     add_executable(${FUGDEMOS_TARGET}
         ${BREAKOUT_SOURCES}
@@ -55,15 +53,15 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
         PUBLIC
             breakout/include
             ext/fug/include
+            ${SDL2_INCLUDE_DIRS}
     )
 
     target_link_libraries(${FUGDEMOS_TARGET}
         PUBLIC
             fug_engine
             fug_graphics
-            sfml-system
-            sfml-window
-            sfml-graphics
+            glsprite-glutil
+            ${SDL2_LIBRARIES}
     )
 
     target_compile_definitions(${FUGDEMOS_TARGET}

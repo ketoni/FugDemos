@@ -10,16 +10,16 @@
 #include <engine/EventSystem.hpp>
 #include <engine/LogicSystem.hpp>
 #include <PhysicsSystem.hpp>
-#include <SpriteRenderer.hpp>
 #include <CollisionSystem.hpp>
+#include <SpriteDrawBufferGenerator.hpp>
 #include <memory>
 
 
 /// SystemComponent is a singleton component containing all the systems used
 struct SystemSingleton {
     std::unique_ptr<PhysicsSystem>      physicsSystem;
-    std::unique_ptr<SpriteRenderer>     spriteRenderer;
     std::unique_ptr<CollisionSystem>    collisionSystem;
+    std::unique_ptr<SpriteDrawBufferGenerator> spriteDrawBufferGenerator;
     std::unique_ptr<fug::EventSystem>        eventSystem;
     std::unique_ptr<fug::LogicSystem>        logicSystem;
 };
