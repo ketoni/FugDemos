@@ -50,7 +50,6 @@ if ("${FUGDEMOS_TARGET}" STREQUAL "Breakout")
         PUBLIC
             breakout/include
             ext/fug/include
-            ext/vecmat
     )
 
     target_link_libraries(Breakout

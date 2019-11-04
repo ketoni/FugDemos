@@ -1,6 +1,3 @@
 [submodule "fug"]
 	path = ext/fug
 	url = git@github.com:Lehdari/fug.git
-[submodule "ext/vecmat"]
-	path = ext/vecmat
-	url = https://github.com/tkln/vecmat.git
